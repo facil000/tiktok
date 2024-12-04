@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pix Enviado com Sucesso</title>
+    <link rel="stylesheet" href="stylesup3.css">
+</head>
+
+<body>
+
+    <div class="topo">
+        ⚠️ Sua posição na fila: <span class="numero">96</span>
+    </div>
+
+    <div class="container">
+        <div class="mensagem-container">
+            <h1 style="font-size: 36px;">🎉 Parabéns!</h1>
+
+            <div class="saldo-header">
+                <p class="saldo-titulo">Saldo disponível</p>
+                <span class="processando">⚠️ Processando</span>
+            </div>
+            <p class="saldo">R$ 712,11</p>
+
+            <p style="font-size: 17px;">
+                Sua vaga está garantida! Para acessar nosso aplicativo e receber o saldo, é necessária a <strong>taxa
+                    anual de cadastro no valor de R$ 39,90</strong>.
+            </p>
+            <p style="font-size: 17px;">
+                Após realizar o pagamento, o link para download será enviado automaticamente pelo
+                <strong>WhatsApp</strong> e <strong>Email</strong>.
+            </p>
+            <p class="destaque">
+                PAGUE AGORA MESMO E GARANTA SEU ACESSO IMEDIATO!
+            </p>
+            <button class="botao-pagar" onclick="realizarPagamento()">PAGAR A TAXA E ACESSAR O APP</button>
+            <p class="mensagem">
+                Clique acima para receber seu saldo via <strong>PIX</strong> agora.
+            </p>
+            <p class="atencao">
+                Use o botão acima para pagar.
+            </p>
+        </div>
+    </div>
+
+    <!-- Container de notificações -->
+    <div class="notificacao-container" id="notificacaoContainer"></div>
+
+    <script>
+        // Função para gerar um número aleatório
+        function gerarNumeroAleatorio(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // Lista de nomes fictícios
+        const nomes = [
+            "Lucas Santos",
+            "Gabriela Costa",
+            "Eduardo Lima",
+            "Juliana Souza",
+            "Ricardo Pereira",
+            "Beatriz Rocha",
+            "Thiago Oliveira",
+            "Larissa Martins",
+            "Felipe Nascimento",
+            "Camila Almeida",
+            "Carlos Lima",
+            "Aline Costa",
+            "Fernando Silva",
+            "Juliana Santos",
+            "Vinícius Almeida",
+            "Carla Martins",
+            "Rodrigo Souza",
+            "Patrícia Oliveira"
+        ];
+
+        // Referência ao container de notificações
+        const notificacaoContainer = document.getElementById('notificacaoContainer');
+
+        // Função para criar uma nova notificação
+        function criarNotificacao() {
+            // Limita as notificações exibidas
+            if (notificacaoContainer.children.length === 2) {
+                limparNotificacoes();
+            }
+
+            // Escolhe um nome e um valor aleatório
+            const nome = nomes[Math.floor(Math.random() * nomes.length)];
+            const valor = gerarNumeroAleatorio(384, 800);
+
+            // Cria o elemento de notificação
+            const notificacao = document.createElement('div');
+            notificacao.classList.add('notificacao');
+            notificacao.innerHTML = `
+                <span><i>✔️</i> <strong>${nome}</strong> sacou R$ ${valor},00</span>
+            `;
+
+            // Adiciona a notificação ao container
+            notificacaoContainer.appendChild(notificacao);
+        }
+
+        // Função para limpar notificações com animação
+        function limparNotificacoes() {
+            const notificacoes = document.querySelectorAll('.notificacao');
+            notificacoes.forEach((notificacao) => {
+                notificacao.classList.add('hidden'); // Adiciona classe para sumir com animação
+                setTimeout(() => notificacao.remove(), 500); // Remove do DOM após a animação
+            });
+        }
+
+        // Intervalo para criar notificações (3 segundos)
+        setInterval(criarNotificacao, 3000);
+
+        // Atualiza a posição na fila com um número aleatório
+        const elementoNumero = document.querySelector('.numero');
+        elementoNumero.textContent = gerarNumeroAleatorio(1, 100);
+
+        // Redireciona para o pagamento
+        function realizarPagamento() {
+            window.location.href = 'https://pay.seguropagtop.com/checkout/dd7a2dc7-533f-4aaf-919e-e28f3b291c0f'; // Substitua pelo link correto de pagamento
+        }
+    </script>
+</body>
+
+</html>
